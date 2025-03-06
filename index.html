@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generare Nume Fisier BIG Radu</title>
+    <title>Generare Nume</title>
     <style>
         /* Stiluri comune */
         body {
@@ -80,6 +80,7 @@
             font-weight: bold;
             font-size: 18px;
             color: #333;
+            word-wrap: break-word;
         }
 
         .toggle-btn {
@@ -130,6 +131,23 @@
         .dark-theme .toggle-btn:hover {
             background-color: #555;
         }
+
+        .copy-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -137,7 +155,7 @@
     <div class="container">
         <button class="toggle-btn" onclick="toggleTheme()">Schimbă Tema</button>
 
-        <h1>Generare Nume Fisier BIG Radu</h1>
+        <h1>Generare Nume</h1>
         <form id="form">
             <label for="clasa_numar">Alege numărul clasei (0-13):</label>
             <select id="clasa_numar" required>
@@ -232,6 +250,7 @@
         </form>
 
         <div class="result" id="result"></div>
+        <button class="copy-btn" id="copy-btn" style="display:none;" onclick="copyToClipboard()">Copiază Numele</button>
     </div>
 
     <script>
@@ -302,6 +321,14 @@
             let numeGenerat = `${clasaCombinata}-${alCatelea}-${numeleMeu}-${temaProiectului}-${dataAzi}-${extensieMare}.${extensieMica}`;
 
             document.getElementById('result').textContent = `Numele generat este: ${numeGenerat}`;
+            document.getElementById('copy-btn').style.display = 'block';
+        }
+
+        function copyToClipboard() {
+            const resultText = document.getElementById('result').textContent.replace("Numele generat este: ", "");
+            navigator.clipboard.writeText(resultText).then(() => {
+                alert("Numele a fost copiat în clipboard!");
+            });
         }
     </script>
 
